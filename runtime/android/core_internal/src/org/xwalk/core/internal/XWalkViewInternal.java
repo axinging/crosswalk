@@ -829,6 +829,18 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
         settings.setAcceptLanguages(acceptLanguages);
     }
 
+    /**
+     * capture a bitmap of visible content.
+     * @param XWalkGetBitmapCallbackInternal callback when bitmap capture is done.
+     * @since 6.0
+     */
+    @XWalkAPI
+    public void captureBitmapAsync(XWalkGetBitmapCallbackInternal callback) {
+        if (mContent == null) return;
+        checkThreadSafety();
+        mContent.captureBitmapAsync(callback);
+    }
+
     // TODO(yongsheng): this is not public.
     /**
      * @hide

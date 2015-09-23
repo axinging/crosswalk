@@ -50,6 +50,10 @@ import org.chromium.media.MediaPlayerBridge;
 import org.chromium.ui.base.ActivityWindowAndroid;
 import org.chromium.ui.gfx.DeviceDisplayInfo;
 
+import org.chromium.content.browser.ContentReadbackHandler;
+import org.chromium.content.browser.ContentReadbackHandler.GetBitmapCallback;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 @JNINamespace("xwalk")
 /**
  * This class is the implementation class for XWalkViewInternal by calling internal
@@ -76,6 +80,9 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
     private WebContents mWebContents;
     private boolean mIsLoaded = false;
     private XWalkAutofillClient mXWalkAutofillClient;
+    private XWalkGetBitmapCallbackInternal mXWalkGetBitmapCallbackInternal;
+    private ContentReadbackHandler mContentReadbackHandler;
+    private GetBitmapCallback mGetBitmapCallback;
 
     long mNativeContent;
     long mNativeWebContents;
@@ -122,6 +129,24 @@ class XWalkContent implements XWalkPreferencesInternal.KeyValueChangeListener {
         setNativeContent(nativeInit());
 
         XWalkPreferencesInternal.load(this);
+        initCaptureBitmapAsync();
+    }
+
+    private void initCaptureBitmapAsync() {
+        mContentReadbackHandler = mContentViewRenderView.getContentReadbackHandler();
+	    mGetBitmapCallback = new GetBitmapCallback() {
+            @Override
+            public void onFinishGetBitmap(Bitmap bitmap, int response) {
+            if (mXWalkGetBitmapCallbackInternal == null) return;
+                mXWalkGetBitmapCallbackInternal.onFinishGetBitmap(bitmap, response);
+            }
+        };
+    }
+
+    public void captureBitmapAsync(XWalkGetBitmapCallbackInternal callback) {
+        mXWalkGetBitmapCallbackInternal = callback;
+        mContentReadbackHandler.getContentBitmapAsync(1.0f, new Rect(), mContentViewCore,
+            Bitmap.Config.ARGB_8888, mGetBitmapCallback);
     }
 
     private void setNativeContent(long newNativeContent) {
