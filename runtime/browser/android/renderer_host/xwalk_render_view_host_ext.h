@@ -15,6 +15,10 @@
 
 class GURL;
 
+namespace blink {
+struct WebWindowFeatures;
+}  // namespace blink
+
 namespace content {
 struct FrameNavigateParams;
 struct LoadCommittedDetails;
@@ -70,6 +74,8 @@ class XWalkRenderViewHostExt : public content::WebContentsObserver,
   // Sets the zoom factor for text only. Used in layout modes other than
   // Text Autosizing.
   void SetTextZoomFactor(float factor);
+
+  void SetWindowFeatures(const blink::WebWindowFeatures& window_features);
 
  private:
   // content::WebContentsObserver implementation.

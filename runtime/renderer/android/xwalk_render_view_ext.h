@@ -13,7 +13,7 @@ namespace blink {
 
 class WebNode;
 class WebURL;
-
+struct WebWindowFeatures;
 }  // namespace blink
 
 namespace xwalk {
@@ -48,6 +48,8 @@ class XWalkRenderViewExt : public content::RenderViewObserver {
   void OnSetBackgroundColor(SkColor c);
 
   void OnSetTextZoomFactor(float zoom_factor);
+
+  void OnSetWindowFeatures(const blink::WebWindowFeatures& window_features);
 
   DISALLOW_COPY_AND_ASSIGN(XWalkRenderViewExt);
 };

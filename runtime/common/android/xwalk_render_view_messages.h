@@ -93,6 +93,11 @@ IPC_MESSAGE_ROUTED1(XWalkViewMsg_SetBackgroundColor, // NOLINT(*)
 IPC_MESSAGE_ROUTED1(XWalkViewMsg_SetTextZoomFactor, // NOLINT(*)
                     float)
 
+// Updates the window features of the render view.
+IPC_MESSAGE_ROUTED1(XWalkViewMsg_SetWindowFeatures,
+                    blink::WebWindowFeatures /* window_features */)
+
+
 //-----------------------------------------------------------------------------
 // RenderView messages
 // These are messages sent from the renderer to the browser process.

@@ -149,6 +149,7 @@ bool XWalkRenderViewExt::OnMessageReceived(const IPC::Message& message) {
     IPC_MESSAGE_HANDLER(XWalkViewMsg_SetInitialPageScale, OnSetInitialPageScale)
     IPC_MESSAGE_HANDLER(XWalkViewMsg_SetBackgroundColor, OnSetBackgroundColor)
     IPC_MESSAGE_HANDLER(XWalkViewMsg_SetTextZoomFactor, OnSetTextZoomFactor)
+    IPC_MESSAGE_HANDLER(XWalkViewMsg_SetWindowFeatures, OnSetWindowFeatures)
     IPC_MESSAGE_UNHANDLED(handled = false)
   IPC_END_MESSAGE_MAP()
   return handled;
@@ -260,6 +261,12 @@ void XWalkRenderViewExt::OnSetTextZoomFactor(float zoom_factor) {
   // Hide selection and autofill popups.
   render_view()->GetWebView()->hidePopups();
   render_view()->GetWebView()->setTextZoomFactor(zoom_factor);
+}
+
+void XWalkRenderViewExt::OnSetWindowFeatures(const blink::WebWindowFeatures& window_features) {
+  if (!render_view() || !render_view()->GetWebView())
+    return;
+  render_view()->GetWebView()->setWindowFeatures(window_features);
 }
 
 }  // namespace xwalk

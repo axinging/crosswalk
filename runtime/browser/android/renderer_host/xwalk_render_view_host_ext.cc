@@ -171,12 +171,21 @@ void XWalkRenderViewHostExt::SetOriginAccessWhitelist(
 void XWalkRenderViewHostExt::SetBackgroundColor(SkColor c) {
   DCHECK(CalledOnValidThread());
   Send(new XWalkViewMsg_SetBackgroundColor(web_contents()->GetRoutingID(), c));
+  blink::WebWindowFeatures webWindowFeatures;
+  webWindowFeatures.scrollbarsVisible = false;
+  SetWindowFeatures(webWindowFeatures);
 }
 
 void XWalkRenderViewHostExt::SetTextZoomFactor(float factor) {
   DCHECK(CalledOnValidThread());
   Send(new XWalkViewMsg_SetTextZoomFactor(web_contents()->GetRoutingID(),
       factor));
+}
+
+void XWalkRenderViewHostExt::SetWindowFeatures(const blink::WebWindowFeatures& window_features) {
+  DCHECK(CalledOnValidThread());
+  Send(new XWalkViewMsg_SetWindowFeatures(web_contents()->GetRoutingID(),
+      window_features));
 }
 
 }  // namespace xwalk

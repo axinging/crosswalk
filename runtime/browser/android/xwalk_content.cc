@@ -562,4 +562,10 @@ void XWalkContent::SetBackgroundColor(JNIEnv* env, jobject obj, jint color) {
   render_view_host_ext_->SetBackgroundColor(color);
 }
 
+// Called by Java.
+void XWalkContent::SetBackgroundColor(JNIEnv* env, jobject obj, jint color) {
+  DCHECK(BrowserThread::CurrentlyOn(BrowserThread::UI));
+  render_view_host_ext_->SetBackgroundColor(color);
+}
+
 }  // namespace xwalk
