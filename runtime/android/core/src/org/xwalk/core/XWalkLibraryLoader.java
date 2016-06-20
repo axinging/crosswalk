@@ -263,7 +263,7 @@ class XWalkLibraryLoader {
 
             mIsCompressed = XWalkDecompressor.isLibraryCompressed(mContext);
             if (mIsCompressed) {
-                SharedPreferences sp = mContext.getSharedPreferences("libxwalkcore",
+                SharedPreferences sp = mContext.getSharedPreferences("libxwalkcore.cr",
                         Context.MODE_PRIVATE);
                 int version = sp.getInt("version", 0);
                 mIsDecompressed = version > 0 && version == XWalkAppVersion.API_VERSION;
@@ -277,7 +277,7 @@ class XWalkLibraryLoader {
 
             if (!XWalkDecompressor.decompressLibrary(mContext)) return 1;
 
-            SharedPreferences sp = mContext.getSharedPreferences("libxwalkcore",
+            SharedPreferences sp = mContext.getSharedPreferences("libxwalkcore.cr",
                     Context.MODE_PRIVATE);
             sp.edit().putInt("version", XWalkAppVersion.API_VERSION).apply();
             return 0;

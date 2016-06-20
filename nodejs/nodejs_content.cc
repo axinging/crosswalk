@@ -10,7 +10,7 @@
 #include "base/strings/string_util.h"
 #include "base/strings/utf_string_conversions.h"
 #include "base/threading/thread_restrictions.h"
-#include "third_party/WebKit/public/web/WebScopedMicrotaskSuppression.h"
+//FIXME: #include "third_party/WebKit/public/web/WebScopedMicrotaskSuppression.h"
 #include "third_party/WebKit/Source/platform/ScriptForbiddenScope.h"
 
 CallTickCallbackFn g_call_tick_callback_fn = nullptr;
@@ -33,13 +33,13 @@ namespace xwalk {
 namespace nodejs {
 
 v8::Handle<v8::Value> CallNWTickCallback(void* env, const v8::Handle<v8::Value> ret) {
-  blink::WebScopedMicrotaskSuppression suppression;
+  //FIXME: blink::WebScopedMicrotaskSuppression suppression;
   g_call_tick_callback_fn(env);
   return Undefined(v8::Isolate::GetCurrent());
 }
 
 int nw_uv_run(void* loop, int mode) {
-  blink::WebScopedMicrotaskSuppression suppression;
+  //FIXME: blink::WebScopedMicrotaskSuppression suppression;
   return g_uv_run_fn(loop, mode);
 }
 
@@ -60,7 +60,7 @@ void DidCreateScriptContext(blink::WebLocalFrame* frame, v8::Handle<v8::Context>
 
   v8::Isolate* isolate = v8::Isolate::GetCurrent();
   v8::HandleScope scope(isolate);
-  blink::WebScopedMicrotaskSuppression suppression;
+  //FIXME: blink::WebScopedMicrotaskSuppression suppression;
 
   g_set_nw_tick_callback_fn(&CallNWTickCallback);
   v8::Local<v8::Context> dom_context = context;
@@ -82,7 +82,7 @@ void DidCreateScriptContext(blink::WebLocalFrame* frame, v8::Handle<v8::Context>
 }
 
 void WillReleaseScriptContext(blink::WebLocalFrame* frame, v8::Handle<v8::Context> context) {
-  blink::WebScopedMicrotaskSuppression suppression;
+  //FIXME: blink::WebScopedMicrotaskSuppression suppression;
   blink::ScriptForbiddenScope::AllowUserAgentScript script;
   void* env = g_get_current_env_fn(context);
   if (g_is_node_initialized_fn()) {
@@ -93,7 +93,7 @@ void WillReleaseScriptContext(blink::WebLocalFrame* frame, v8::Handle<v8::Contex
 
 void LoadNodeSymbols() {
   base::NativeLibraryLoadError error;
-  base::FilePath node_dll_path = base::FilePath::FromUTF16Unsafe(base::GetNativeLibraryName(base::UTF8ToUTF16("node")));
+  base::FilePath node_dll_path = base::FilePath::FromUTF16Unsafe(base::GetNativeLibraryName(base::UTF8ToUTF16("node.cr")));
   base::NativeLibrary node_dll = base::LoadNativeLibrary(node_dll_path, &error);
   if(!node_dll)
     LOG_IF(FATAL, true) << "Failed to load node library (error: " << error.ToString() << ")";

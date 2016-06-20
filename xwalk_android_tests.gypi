@@ -43,6 +43,7 @@
         'native_lib_target': 'libxwalkdummy',
         'additional_bundled_libs': [
           '<(PRODUCT_DIR)/lib/libxwalkcore.>(android_product_extension)',
+          '<(PRODUCT_DIR)/lib/libnode.>(android_product_extension)',
         ],
         'additional_input_paths': [
           '<(PRODUCT_DIR)/xwalk_xwview/assets/www/cross_origin.html',

@@ -34,11 +34,11 @@ import SevenZip.Compression.LZMA.Decoder;
 
 class XWalkDecompressor {
     private static final String[] MANDATORY_LIBRARIES = {
-        "libxwalkcore.so"
+        "libxwalkcore.cr.so"
     };
 
     private static final String[] MANDATORY_RESOURCES = {
-        "libxwalkcore.so",
+        "libxwalkcore.cr.so",
         "classes.dex",
         "icudtl.dat",
         "xwalk.pak",

@@ -62,7 +62,7 @@ class XWalkViewDelegate {
     };
 
     private static final String[] MANDATORY_LIBRARIES = {
-        "xwalkcore"
+        "xwalkcore.cr"
     };
     private static final String TAG = "XWalkLib";
     private static final String XWALK_RESOURCES_LIST_RES_NAME = "xwalk_resources_list";

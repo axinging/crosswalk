@@ -316,8 +316,7 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
                   "        addView((FrameLayout)bridge, new FrameLayout.LayoutParams(",
                   "                FrameLayout.LayoutParams.MATCH_PARENT,",
                   "                FrameLayout.LayoutParams.MATCH_PARENT));",
-                  "        removeViewAt(0);",
-                  "        new org.xwalk.core.extension.XWalkExternalExtensionManagerImpl(this);"})
+                  "        removeViewAt(0);"})
     public XWalkViewInternal(Context context) {
         super(context, null);
 
@@ -350,8 +349,7 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
                   "        addView((FrameLayout)bridge, new FrameLayout.LayoutParams(",
                   "                FrameLayout.LayoutParams.MATCH_PARENT,",
                   "                FrameLayout.LayoutParams.MATCH_PARENT));",
-                  "        removeViewAt(0);",
-                  "        new org.xwalk.core.extension.XWalkExternalExtensionManagerImpl(this);"},
+                  "        removeViewAt(0);"},
               postBridgeLines = {
                   "        String animatable = null;",
                   "        try {",
@@ -385,8 +383,7 @@ public class XWalkViewInternal extends android.widget.FrameLayout {
                   "        addView((FrameLayout)bridge, new FrameLayout.LayoutParams(",
                   "                FrameLayout.LayoutParams.MATCH_PARENT,",
                   "                FrameLayout.LayoutParams.MATCH_PARENT));",
-                  "        removeViewAt(0);",
-                  "        new org.xwalk.core.extension.XWalkExternalExtensionManagerImpl(this);"})
+                  "        removeViewAt(0);"})
     public XWalkViewInternal(Context context, Activity activity) {
         super(context, null);
 
