@@ -164,7 +164,7 @@
       ],
     },
     # Copy conditionally-set variables out one scope.
-    'component%': '<(component)',
+    #'component%': '<(component)',
     'disable_nacl%': '<(disable_nacl)',
     'enable_widevine%': '<(enable_widevine)',
     'ffmpeg_branding%': '<(ffmpeg_branding)',

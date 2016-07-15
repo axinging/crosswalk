@@ -15,7 +15,7 @@
 #include "base/path_service.h"
 #include "content/public/browser/browser_thread.h"
 #include "content/public/common/content_paths.h"
-#include "third_party/WebKit/public/web/WebScopedMicrotaskSuppression.h"
+//FIXME #include "third_party/WebKit/public/web/WebScopedMicrotaskSuppression.h"
 #include "xwalk/nodejs/node_includes.h"
 
 using content::BrowserThread;
@@ -101,7 +101,7 @@ void NodeBindings::DidCreateScriptContext(
     PrepareMessageLoop();
   }
 
-  blink::WebScopedMicrotaskSuppression suppression;
+  //FIXME blink::WebScopedMicrotaskSuppression suppression;
   // Setup node environment for each window.
   node::Environment* env = CreateEnvironment(context);
 
@@ -151,7 +151,11 @@ node::Environment* NodeBindings::CreateEnvironment(
   base::FilePath script_path =
       resources_path.Append(process_type)
                     .Append(FILE_PATH_LITERAL("init.js"));
-  std::string script_path_str = script_path.AsUTF8Unsafe();
+  LOG(INFO) <<__FUNCTION__<<", LINE "<<__LINE__
+      <<", resources_path="<<resources_path.AsUTF8Unsafe().c_str()
+      <<", script_path="<<script_path.AsUTF8Unsafe().c_str();
+  //std::string script_path_str = script_path.AsUTF8Unsafe();
+  std::string script_path_str = "/data/local/tmp/node/resources/init.js";
   args.insert(args.begin() + 1, script_path_str.c_str());
 
   std::unique_ptr<const char*[]> c_argv = StringVectorToArgArray(args);
@@ -207,7 +211,7 @@ void NodeBindings::UvRunOnce() {
       new v8::MicrotasksScope(env->isolate(),
                               v8::MicrotasksScope::kRunMicrotasks));
   */
-  blink::WebScopedMicrotaskSuppression suppression;
+  //FIXME blink::WebScopedMicrotaskSuppression suppression;
 
   // Deal with uv events.
   int r = uv_run(uv_loop_, UV_RUN_NOWAIT);

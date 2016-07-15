@@ -20,6 +20,8 @@
       'sources': [
         'node_bindings.cc',
         'node_bindings.h',
+        'node_bindings_android.cc',
+        'node_bindings_android.h',
         'node_bindings_linux.cc',
         'node_bindings_linux.h',
         'node_bindings_mac.cc',
