@@ -29,6 +29,7 @@ buildtools_rev = 'a2082cafead67b75c9c8edbdca47a2def6dbab21'
 
 chromium_git = 'https://chromium.googlesource.com'
 crosswalk_git = 'https://github.com/crosswalk-project'
+node_git = 'https://github.com/axinging'
 
 # ------------------------------------------------------
 # gclient solutions.
@@ -50,6 +51,9 @@ solutions = [
       # support.
       'src/third_party/libpxc':
         crosswalk_git + '/libpxc.git@568e4ecc969b4663e82034e71d08efdd5fa77e1a',
+      # Add node.
+      'src/third_party/node':
+        node_git + '/node.git@electron4android',
 
       # These directories are not relevant to Crosswalk and can be safely ignored
       # in a checkout. It avoids creating additional directories outside src/ that
